@@ -15,27 +15,35 @@ set cursorcolumn
 " indentLine 开启代码对齐线
 let g:indentLine_enabled = 1
 
-" markdown
-" let system = system('uname -s')
-" if system == "Darwin\n"
-"     let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
-" else
-"     let g:mkdp_path_to_chrome = '/usr/bin/google-chrome-stable %U'
-" endif
-" nmap <silent> <F7> <Plug>MarkdownPreview
-" imap <silent> <F7> <Plug>MarkdownPreview
-" nmap <silent> <F8> <Plug>StopMarkdownPreview
-" imap <silent> <F8> <Plug>StopMarkdownPreview
-
-" Doxygen
-" let g:DoxygenToolkit_authorName="chxuan, 787280310@qq.com"
-" let s:licenseTag = "Copyright(C)\<enter>"
-" let s:licenseTag = s:licenseTag . "For free\<enter>"
-" let s:licenseTag = s:licenseTag . "All right reserved\<enter>"
-" let g:DoxygenToolkit_licenseTag = s:licenseTag
-" let g:DoxygenToolkit_briefTag_funcName="yes"
-" let g:doxygen_enhanced_color=1
-" let g:DoxygenToolkit_commentType="Qt"
+" 方便中文编织
+" 为 Markdown 文件设置自动命令
+augroup markdown_settings
+    autocmd!
+    " 仅在 Markdown 文件中设置 textwidth, wrap 和 formatoptions
+    "autocmd FileType markdown setlocal textwidth=80
+    autocmd FileType markdown setlocal nolinebreak
+    autocmd FileType markdown setlocal wrap
+    autocmd FileType markdown setlocal formatoptions+=t
+augroup END
+command WrapToggle call WrapToggle()
+func WrapToggle()
+    if !exists('g:is_wrapped')
+        let g:is_wrapped=0
+    endif
+    if g:is_wrapped==0
+        nmap j gj
+        nmap k gk
+        set wrap
+        let g:is_wrapped=1
+    else
+        "使用unmap系列命令，后面不要有空格
+        nunmap j
+        nunmap k
+        set nowrap
+        let g:is_wrapped=0
+    endif
+endfunc
+set whichwrap+=<,>,[,]
 set scrolloff=5
 set foldmethod=indent
 nmap <leader>vc :vsplit<CR>:e ~/.vim_runtime/my_configs.vim<CR>
@@ -243,6 +251,7 @@ let g:ZFVimIM_symbolMap = {
             \ }
 
 imap <leader>. ，
+imap <leader>/ .
 
 " 4 码自动上屏
 function! s:check()
