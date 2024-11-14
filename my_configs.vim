@@ -63,12 +63,9 @@ nmap <leader>= ggvG=<c-O><c-O>
 map <F2> :NERDTreeToggle<CR>
 autocmd VimEnter * Tagbar
 map <F1> :TagbarToggle<CR>
-"autocmd FileType * inoremap <buffer> <leader>/ <C-r>=CommentToggle()<CR>
-"autocmd FileType * nnoremap <buffer> <leader>/ :call CommentToggle()<CR>
-" Important!!
-if has('termguicolors')
-  set termguicolors
-endif
+"if has('termguicolors')
+  "set termguicolors
+"endif
 
 " For dark version.
 set background=dark
@@ -100,26 +97,6 @@ nnoremap <leader>h <C-w>h
 " Redimensionner la fenêtre vers la droite
 nnoremap <leader>l <C-w>l
 nnoremap <C-L> :vertical resize +2<CR>
-" Définition de la fonction CommentToggle
-"function! CommentToggle()
-"" 获取当前文件类型
-"let l:filetype = &filetype
-"let l:old_pos = getpos(".")
-"let l:line = getline('.')
-"let l:first_char = strpart(l:line, 0, 1)
-"" 根据文件类型添加不同的注释
-"if l:first_char == '"' || l:first_char == "/"
-"execute 'normal! 0xx'
-"call setpos(".", old_pos)
-"elseif l:filetype == 'vim'
-"execute 'normal! 0i" '
-"call setpos('.', old_pos)
-"elseif l:filetype == 'c' || l:filetype == 'cpp'
-"execute 'normal! 0i//'
-"call setpos('.', old_pos)
-"endif
-
-"endfunction
 nnoremap <C-E> :!gedit %<CR>
 nnoremap <leader>cr :!clear<CR>
 nnoremap <leader>mk :wa<CR>:!make<CR>
@@ -138,9 +115,9 @@ endif
 call plug#begin()
 
 " List your plugins here
-Plug 'sainnhe/everforest.git'
-Plug 'junegunn/vim-plug.git'
-Plug 'sheerun/vim-polyglot.git'
+Plug 'sainnhe/everforest'
+Plug 'junegunn/vim-plug'
+Plug 'sheerun/vim-polyglot'
 "Plug 'h-youhei/vim-ibus'
 "Plug 'ybian/smartim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -266,32 +243,6 @@ let g:ZFVimIM_symbolMap = {
             \ }
 
 imap <leader>. ，
-"inoremap <leader>a A
-"inoremap <leader>b B
-"inoremap <leader>c C
-"inoremap <leader>d D
-"inoremap <leader>e E
-"inoremap <leader>f F
-"inoremap <leader>g G
-"inoremap <leader>h H
-"inoremap <leader>i I
-"inoremap <leader>j J
-"inoremap <leader>k K
-"inoremap <leader>l L
-"inoremap <leader>m M
-"inoremap <leader>n N
-"inoremap <leader>o O
-""inoremap <leader>p P
-"inoremap <leader>q Q
-"inoremap <leader>r R
-"inoremap <leader>s S
-"inoremap <leader>t T
-"inoremap <leader>u U
-"inoremap <leader>v V
-"inoremap <leader>w W
-"inoremap <leader>x X
-"inoremap <leader>y Y
-"inoremap <leader>z Z
 
 " 4 码自动上屏
 function! s:check()
